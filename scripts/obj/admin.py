@@ -8,6 +8,26 @@ from obj.user import User
 """ Admin class. """ 
 class Admin(User): 
 
+    """
+        A class representation of the user. 
+
+        '''
+
+        Attributes
+        ----------
+        id : int
+        username : str 
+        password : str 
+        authority : int 
+
+        Methods 
+        -------
+
+        get/set_attributes 
+            Returns or sets each individual attribute. 
+            
+    """
+
     """ Initializes the User. 
 
     @param args : List of arguments 
