@@ -9,7 +9,7 @@ from obj.user import User
 class Admin(User): 
 
     """
-        A class representation of the user. 
+        A class representation of a user. 
 
         '''
 
@@ -19,13 +19,14 @@ class Admin(User):
         username : str 
         password : str 
         authority : int 
+        status : boolean
 
         Methods 
         -------
 
         get/set_attributes 
             Returns or sets each individual attribute. 
-            
+
     """
 
     """ Initializes the User. 
@@ -55,6 +56,8 @@ class Admin(User):
                                     self.get_username(),
                                     self.get_password(),
                                     int(self.get_authority()) ) )
+        
+        """ Close connection. """
         cursor.close()
         connection.commit() 
 

@@ -1,24 +1,26 @@
 # Utilities 
 
-Utility scripts created for machines on the TC Network.
+Utility scripts created for TC Operatives.
 
 ## Topics
 
-	- system analysis 
+	- database analysis
+    - system analysis 
 	- network analysis 
 	- program testing 
 
-## Uses 
+## Database Utilities 
 
-This secton will describe how to use these scripts. 
+### dbpop.py
 
-### Windows 
+This script will populate the database used in other projects sought by TC. 
 
-Here we will explain scripts designed for Windows machines. 
+Using this script depends on different file paths, such as the sqlite3 database file in question and the csv files used to populate the database. 
 
-### Linux 
-
-Here we will explain scripts designed for Linux machines. 
+After confirming the location of these and putting their file paths into the code, run the following python script from within the scripts directory:  
+```
+python dbpop.py 
+```
 
 ## Acknowledgements
 

@@ -13,6 +13,7 @@ class User:
         username : str 
         password : str 
         authority : int 
+        status : boolean
 
         Methods 
         -------
