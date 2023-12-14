@@ -78,7 +78,7 @@ class Admin(User):
         cursor = connection.execute("SELECT * from administrators")
         
         for r in cursor:
-            if self.get_id() in r: 
+            if int(self.get_id()) in r: 
                 self.set_status(True)
                 return self.get_status()
             else:

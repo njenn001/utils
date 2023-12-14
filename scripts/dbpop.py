@@ -5,12 +5,43 @@ import csv
 """ Class imports. """
 from obj.admin import Admin
 from obj.user import User 
-from obj.map import Map 
+from obj.map import Map
+from obj.item import Item 
 
 """ Data files """
 admin_file = 'admin.csv'
 users_file = 'users.csv'
 maps_file = 'maps.csv'
+items_file = 'items.csv'
+
+""" Loads items from file. 
+
+@param file : Items file
+@type file : File 
+"""
+def load_items(file): 
+    
+    """ New reader object. """ 
+    reader = csv.reader(file, delimiter=' ')
+    
+    i=0
+    """ Print the rows. """
+    for row in reader: 
+        
+        """ Skip first row """
+        if i > 0: 
+            
+            """ New item injection. """
+            item = Item(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7])
+            
+            if (not item.check()):
+                print(item.get_status())
+                item.inject()
+            else: 
+                print('Item ' + item.get_kind() + ' exists')
+        
+        """ Increment. """ 
+        i+=1
 
 """ Loads maps from file. 
 
@@ -116,6 +147,8 @@ def load_data(files):
                 load_admin(file)
             elif f == 'maps.csv': 
                 load_maps(file)
+            elif f == 'items.csv': 
+                load_items(file)
 
 """ The main sequence. 
 
@@ -124,7 +157,7 @@ def load_data(files):
 def main():
     
     """ Populate filenames. """
-    files = [admin_file, users_file, maps_file]
+    files = [admin_file, users_file, maps_file, items_file]
 
     """ Load data from files. """
     load_data(files)
