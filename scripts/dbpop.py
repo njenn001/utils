@@ -7,12 +7,43 @@ from obj.admin import Admin
 from obj.user import User 
 from obj.map import Map
 from obj.item import Item 
+from obj.sprite import Sprite 
 
 """ Data files """
-admin_file = 'admin.csv'
-users_file = 'users.csv'
-maps_file = 'maps.csv'
-items_file = 'items.csv'
+admin_file = './files/admin.csv'
+users_file = './files/users.csv'
+maps_file = './files/maps.csv'
+items_file = './files/items.csv'
+sprites_file = './files/sprites.csv'
+
+""" Loads sprites from files. 
+
+@param file : Items file 
+@type file : File 
+""" 
+def load_sprites(file): 
+    
+    """ New reader object. """ 
+    reader = csv.reader(file, delimiter=' ')
+    
+    i=0
+    """ Print the rows. """
+    for row in reader: 
+        
+        """ Skip first row """
+        if i > 0: 
+                        
+            """ New item injection. """
+            sprite = Sprite(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7])
+            
+            if (not sprite.check()):
+                #print(sprite.get_status())
+                sprite.inject()
+            else: 
+                print('Sprite ' + sprite.get_kind() + ' exists')
+        
+        """ Increment. """ 
+        i+=1
 
 """ Loads items from file. 
 
@@ -32,10 +63,10 @@ def load_items(file):
         if i > 0: 
             
             """ New item injection. """
-            item = Item(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7])
+            item = Item([row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]])
             
             if (not item.check()):
-                print(item.get_status())
+                #print(item.get_status())
                 item.inject()
             else: 
                 print('Item ' + item.get_kind() + ' exists')
@@ -76,7 +107,7 @@ def load_maps(file):
                 map = Map(id, temp_rows)
 
                 if (not map.check()):
-                    print(map.get_status())
+                    #print(map.get_status())
                     map.inject()
                 else: 
                     print('Map ' + str(map.get_id()) + ' exists')
@@ -93,7 +124,7 @@ def load_maps(file):
     map = Map(id, temp_rows)
 
     if (not map.check()):
-        print(map.get_status())
+        #print(map.get_status())
         map.inject()
     else: 
         print('Map ' + str(map.get_id()) + ' exists')
@@ -120,7 +151,7 @@ def load_admin(file):
             admin = Admin(row[0], row[1], row[2], row[3])
             
             if (not admin.check()):
-                print(admin.get_status())
+                #print(admin.get_status())
                 admin.inject()
             else: 
                 print('Admin ' + admin.get_username() + ' exists')
@@ -143,12 +174,14 @@ def load_data(files):
         with open(f, newline='') as file:
 
             """ Check name. """
-            if f == 'admin.csv':
+            if 'admin.csv' in f:
                 load_admin(file)
-            elif f == 'maps.csv': 
+            elif 'maps.csv' in f: 
                 load_maps(file)
-            elif f == 'items.csv': 
+            elif 'items.csv' in f: 
                 load_items(file)
+            elif 'sprites.csv' in f:
+                load_sprites(file)
 
 """ The main sequence. 
 
@@ -157,7 +190,7 @@ def load_data(files):
 def main():
     
     """ Populate filenames. """
-    files = [admin_file, users_file, maps_file, items_file]
+    files = [admin_file, users_file, maps_file, items_file, sprites_file]
 
     """ Load data from files. """
     load_data(files)

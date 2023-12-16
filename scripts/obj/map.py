@@ -113,7 +113,7 @@ class Map:
         cursor.close()
         connection.commit() 
 
-        print('Injected\n')
+        #print('Injected\n')
         return status 
 
     """ Checks the database for the current map.

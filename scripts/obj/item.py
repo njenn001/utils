@@ -46,14 +46,14 @@ class Item():
         self.symbol = ''
 
         if (args): 
-            self.id = args[0] 
-            self.kind = args[1]
-            self.health = args[2]
-            self.hunger = args[3]
-            self.thirst = args[4]
-            self.excitement = args[5]
-            self.strength = args[6]
-            self.symbol = args[7]
+            self.id = int(args[0][0])
+            self.kind = args[0][1]
+            self.health = int(args[0][2])
+            self.hunger = int(args[0][3])
+            self.thirst = int(args[0][4])
+            self.excitement = int(args[0][5])
+            self.strength = int(args[0][6])
+            self.symbol = args[0][7]
 
         self.status = False 
 
@@ -229,7 +229,7 @@ class Item():
         cursor.close()
         connection.commit() 
 
-        print('Injected\n')
+        #print('Injected\n')
         return status 
 
     """ Checks the database for current admin. 
@@ -246,7 +246,7 @@ class Item():
         cursor = connection.execute("SELECT * from items")
         
         for r in cursor:
-            if int(self.get_id()) in r: 
+            if self.get_kind() in r: 
                 self.set_status(True)
                 return self.get_status()
             else:

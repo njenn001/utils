@@ -61,7 +61,7 @@ class Admin(User):
         cursor.close()
         connection.commit() 
 
-        print('Injected\n')
+        #print('Injected\n')
         return status 
 
     """ Checks the database for current admin. 
