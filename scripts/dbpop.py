@@ -129,6 +129,34 @@ def load_maps(file):
     else: 
         print('Map ' + str(map.get_id()) + ' exists')
 
+""" Loads users from file.
+
+@param file : User file
+@type file : File 
+""" 
+def load_users(file): 
+
+    """ New reader object. """ 
+    reader = csv.reader(file, delimiter=' ')
+    
+    i=0
+    """ Print the rows. """
+    for row in reader: 
+        
+        """ Skip first row """
+        if i > 0: 
+
+            """ New admin injection. """
+            user = User([row[0], row[1], row[2], row[3]])
+            
+            if (not user.check()):
+                #print(admin.get_status())
+                user.inject()
+            else: 
+                print('User ' + user.get_username() + ' exists')
+        
+        """ Increment. """ 
+        i+=1
 
 """ Loads admin from file.
 
@@ -176,6 +204,8 @@ def load_data(files):
             """ Check name. """
             if 'admin.csv' in f:
                 load_admin(file)
+            elif 'users.csv' in f: 
+                load_users(file)
             elif 'maps.csv' in f: 
                 load_maps(file)
             elif 'items.csv' in f: 

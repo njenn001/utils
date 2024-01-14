@@ -1,4 +1,7 @@
-*vscode
-*__pycache__
-
+venv/
 *.csv
+
+*.pyc
+*__pycache__
+*.pytest_cache
+*vscode

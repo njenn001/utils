@@ -1,3 +1,6 @@
+""" Imports. """ 
+import sqlite3 
+
 """ User class. """
 class User:
 
@@ -123,3 +126,51 @@ class User:
     """
     def set_status(self, status): 
         self.status = status 
+
+
+    """ Injects User into database. 
+    
+    @return status : Action status 
+    @rtype status : boolean 
+    """
+    def inject(self):
+
+        status = False
+        
+        """ Database file path. """
+        path = r'D:\repos\laboratory\instance\flaskr.sqlite'
+
+        """ DB connection & cursor. """
+        connection = sqlite3.connect(path)
+        cursor = connection.execute("INSERT INTO users VALUES (?, ?, ?, ?)", 
+                                    (int(self.get_id()), 
+                                    self.get_username(),
+                                    self.get_password(),
+                                    int(self.get_authority()) ) )
+        
+        """ Close connection. """
+        cursor.close()
+        connection.commit() 
+
+        #print('Injected\n')
+        return status 
+
+    """ Checks the database for current admin. 
+
+    @return status : User status 
+    @rtype status : boolean
+    """ 
+    def check(self): 
+        """ Database file path. """
+        path = r'D:\repos\laboratory\instance\flaskr.sqlite'
+
+        """ DB connection & cursor. """
+        connection = sqlite3.connect(path)
+        cursor = connection.execute("SELECT * from users")
+        
+        for r in cursor:
+            if int(self.get_id()) in r: 
+                self.set_status(True)
+                return self.get_status()
+            else:
+                pass

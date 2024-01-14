@@ -131,7 +131,7 @@ class Map:
         cursor = connection.execute("SELECT * from maps")
         
         for r in cursor:
-            if self.get_id() in r: 
+            if self.get_id() == r[0]: 
                 self.set_status(True)
                 return self.get_status()
             else:
